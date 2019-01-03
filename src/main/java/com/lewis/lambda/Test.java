@@ -1,7 +1,7 @@
 package com.lewis.lambda;
 
 /**
- * @author: 刘文鑫(liuwenxin03)
+ * @author: draem0507
  * @date: 2019-01-02 20:52
  * @desc: lambda学习
  * @<p> 可选类型声明：不需要声明参数类型，编译器可以统一识别参数值。

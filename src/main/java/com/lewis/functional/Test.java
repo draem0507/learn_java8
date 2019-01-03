@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * @author: 刘文鑫(liuwenxin03)
+ * @author: draem0507
  * @date: 2019-01-02 21:25
  * @desc: 函数式接口
  *
