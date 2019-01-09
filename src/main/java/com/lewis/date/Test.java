@@ -1,9 +1,8 @@
 package com.lewis.date;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 
 /**
  * @author: draem0507
@@ -18,6 +17,8 @@ import java.time.Month;
  * Local(本地) − 简化了日期时间的处理，没有时区的问题。
  * Zoned(时区) − 通过制定的时区处理日期时间。
  * 新的java.time包涵盖了所有处理日期，时间，日期/时间，时区，时刻（instants），过程（during）与时钟（clock）的操作。</p>
+ *
+ * @refer https://vimsky.com/article/3745.html
  */
 public class Test {
 
@@ -47,6 +48,37 @@ public class Test {
         LocalTime date4 = LocalTime.of(22, 15,20);
 
         LocalTime date5 = LocalTime.parse("20:15:30");
+
+        String str = "2019-01-08 11:30";
+
+        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        TemporalAccessor temporalAccessor= formatter.parse(str);
+
+        LocalDateTime localDateTime= LocalDateTime.parse(str, formatter);
+        System.out.println(localDateTime.toString());
+
+        localDateTime =LocalDateTime.from(temporalAccessor);
+        System.out.println(localDateTime.toString());
+
+        //如果时间字符串符合 <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_LOCAL_DATE_TIME">ISO-8601 format</a>,则不用手动设置format
+        String strDatewithTime = "2015-08-04T10:11:30";
+        LocalDateTime aLDT = LocalDateTime.parse(strDatewithTime);
+        System.out.println("Date with Time: " + aLDT);
+
+        //将LocalDateTime转换为时区ISO8601字符串
+
+        LocalDateTime ldt = LocalDateTime.now();
+        ZonedDateTime zdt = ldt.atZone(ZoneOffset.UTC); //you might use a different zone
+        String iso8601 = zdt.toString();
+       // 从ISO8601字符串转换回LocalDateTime
+
+         iso8601 = "2016-02-14T18:32:04.150Z";
+         zdt = ZonedDateTime.parse(iso8601);
+         ldt = zdt.toLocalDateTime();
+        System.out.println(ldt.toString());
+
+
 
 
     }
