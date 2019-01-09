@@ -17,7 +17,6 @@ import java.time.temporal.TemporalAccessor;
  * Local(本地) − 简化了日期时间的处理，没有时区的问题。
  * Zoned(时区) − 通过制定的时区处理日期时间。
  * 新的java.time包涵盖了所有处理日期，时间，日期/时间，时区，时刻（instants），过程（during）与时钟（clock）的操作。</p>
- *
  * @refer https://vimsky.com/article/3745.html
  */
 public class Test {
@@ -26,39 +25,39 @@ public class Test {
     public static void main(String[] args) {
 
 
-        LocalDateTime currentTime  = LocalDateTime.now();
+        LocalDateTime currentTime = LocalDateTime.now();
 
 
         System.out.println(currentTime);//2019-01-03T15:36:59.465
 
 
-      LocalDate localDate= currentTime.toLocalDate();
+        LocalDate localDate = currentTime.toLocalDate();
         System.out.println(localDate);//2019-01-03
 
 
         System.out.println(localDate.getMonth());//JANUARY
         System.out.println(localDate.getDayOfMonth());//3
-        LocalDateTime localDateTime_new=  currentTime.withDayOfMonth(5).withMonth(10);
+        LocalDateTime localDateTime_new = currentTime.withDayOfMonth(5).withMonth(10);
         System.out.println(localDateTime_new.getYear());
         System.out.println(localDateTime_new.getMonth());//OCTOBER
 
         LocalDate date3 = LocalDate.of(2019, Month.DECEMBER, 12);
 
         // 22 小时 15 分钟
-        LocalTime date4 = LocalTime.of(22, 15,20);
+        LocalTime date4 = LocalTime.of(22, 15, 20);
 
         LocalTime date5 = LocalTime.parse("20:15:30");
 
         String str = "2019-01-08 11:30";
 
-        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        TemporalAccessor temporalAccessor= formatter.parse(str);
+        TemporalAccessor temporalAccessor = formatter.parse(str);
 
-        LocalDateTime localDateTime= LocalDateTime.parse(str, formatter);
+        LocalDateTime localDateTime = LocalDateTime.parse(str, formatter);
         System.out.println(localDateTime.toString());
 
-        localDateTime =LocalDateTime.from(temporalAccessor);
+        localDateTime = LocalDateTime.from(temporalAccessor);
         System.out.println(localDateTime.toString());
 
         //如果时间字符串符合 <a href="http://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ISO_LOCAL_DATE_TIME">ISO-8601 format</a>,则不用手动设置format
@@ -71,13 +70,16 @@ public class Test {
         LocalDateTime ldt = LocalDateTime.now();
         ZonedDateTime zdt = ldt.atZone(ZoneOffset.UTC); //you might use a different zone
         String iso8601 = zdt.toString();
-       // 从ISO8601字符串转换回LocalDateTime
+        // 从ISO8601字符串转换回LocalDateTime
 
-         iso8601 = "2016-02-14T18:32:04.150Z";
-         zdt = ZonedDateTime.parse(iso8601);
-         ldt = zdt.toLocalDateTime();
+        iso8601 = "2019-01-8T10:32:04.150Z";
+        zdt = ZonedDateTime.parse(iso8601);
+        ldt = zdt.toLocalDateTime();
         System.out.println(ldt.toString());
 
+        //获取时间戳
+        Long timestamp = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        LocalDateTime time2 =LocalDateTime.ofEpochSecond(timestamp/1000,0,ZoneOffset.ofHours(8));
 
 
 
